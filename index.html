@@ -13,11 +13,19 @@
 <nav>
   <div class="nav-inner">
     <a class="logo" href="#">COMPROS<span>COL</span></a>
-    <ul class="nav-links">
-      <li class="active"><a href="#">Inicio</a></li>
-      <li><a href="nosotros.html">Nosotros</a></li>
-      <li>
-        <a href="#">Productos <span class="chevron">▾</span></a>
+
+    <!-- Hamburguesa -->
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <!-- Cerrar en móvil -->
+      <button class="nav-close" onclick="toggleMenu()">✕</button>
+      <li class="active"><a href="#" onclick="toggleMenu()">Inicio</a></li>
+      <li><a href="nosotros.html" onclick="toggleMenu()">Nosotros</a></li>
+      <li class="has-mega">
+        <a href="#" onclick="toggleMega(event)">Productos <span class="chevron">▾</span></a>
         <div class="mega-menu">
           <div class="mega-col">
             <h4>Categorías</h4>
@@ -54,7 +62,7 @@
             <h4>Sectores</h4>
             <ul>
               <li><a href="#">Construcción</a></li>
-              <li><a href="#">IndustriaL</a></li>
+              <li><a href="#">Industrial</a></li>
               <li><a href="#">Alimentos</a></li>
               <li><a href="#">Logística</a></li>
               <li><a href="#">Salud</a></li>
@@ -64,15 +72,19 @@
           </div>
         </div>
       </li>
-      <li><a href="#">Catálogo</a></li>
-      <li><a href="nuestros-asesores.html">Nuestros Asesores</a></li>
+      <li><a href="#catalogo" onclick="toggleMenu()">Catálogo</a></li>
+      <li><a href="nuestros-asesores.html" onclick="toggleMenu()">Nuestros Asesores</a></li>
     </ul>
+
     <div class="nav-search">
-      <input type="text" placeholder="Buscar productos…" id="heroSearch"/>
+      <input type="text" placeholder="Buscar…" id="heroSearch"/>
       <button onclick="buscar()">🔍</button>
     </div>
   </div>
 </nav>
+
+<!-- Overlay menú móvil -->
+<div class="nav-overlay" id="navOverlay" onclick="toggleMenu()"></div>
 
 <!-- ──── HERO ──── -->
 <section class="hero">
@@ -95,23 +107,84 @@
   </div>
 </section>
 
-
-
-<!-- ──── CATÁLOGO ──── -->
+<!-- ──── CATÁLOGO POR CATEGORÍAS ──── -->
 <section class="catalogo" id="catalogo">
   <div class="container">
     <div class="catalogo-header">
       <div>
         <h2 class="section-title" style="text-align:left;font-size:1.8rem">Nuestros Productos</h2>
-        <p style="color:var(--gris-medio);font-size:.85rem" id="conteo">Mostrando todos los productos</p>
+        <p style="color:var(--gris-medio);font-size:.85rem">Selecciona una categoría para ver los productos</p>
       </div>
-      <div class="cat-filters" id="filtros"></div>
     </div>
-    <div class="productos-grid" id="grid"></div>
+    <div class="cat-grid">
+      <a class="cat-card" href="categoria.html?cat=Calzado de Seguridad">
+        <span class="cat-icon">👢</span>
+        <span class="cat-label">Calzado de Seguridad</span>
+        <span class="cat-arrow">→</span>
+      </a>
+      <a class="cat-card" href="categoria.html?cat=Protección Craneal">
+        <span class="cat-icon">⛑️</span>
+        <span class="cat-label">Protección Craneal</span>
+        <span class="cat-arrow">→</span>
+      </a>
+      <a class="cat-card" href="categoria.html?cat=Protección Visual">
+        <span class="cat-icon">🥽</span>
+        <span class="cat-label">Protección Visual</span>
+        <span class="cat-arrow">→</span>
+      </a>
+      <a class="cat-card" href="categoria.html?cat=Protección Manual">
+        <span class="cat-icon">🧤</span>
+        <span class="cat-label">Protección Manual</span>
+        <span class="cat-arrow">→</span>
+      </a>
+      <a class="cat-card" href="categoria.html?cat=Protección Corporal">
+        <span class="cat-icon">🦺</span>
+        <span class="cat-label">Protección Corporal</span>
+        <span class="cat-arrow">→</span>
+      </a>
+      <a class="cat-card" href="categoria.html?cat=Protección Respiratoria">
+        <span class="cat-icon">😷</span>
+        <span class="cat-label">Protección Respiratoria</span>
+        <span class="cat-arrow">→</span>
+      </a>
+      <a class="cat-card" href="categoria.html?cat=Protección Auditiva">
+        <span class="cat-icon">🔇</span>
+        <span class="cat-label">Protección Auditiva</span>
+        <span class="cat-arrow">→</span>
+      </a>
+      <a class="cat-card" href="categoria.html?cat=Trabajo en Alturas">
+        <span class="cat-icon">🧗</span>
+        <span class="cat-label">Trabajo en Alturas</span>
+        <span class="cat-arrow">→</span>
+      </a>
+      <a class="cat-card" href="categoria.html?cat=Señalización">
+        <span class="cat-icon">🚧</span>
+        <span class="cat-label">Señalización</span>
+        <span class="cat-arrow">→</span>
+      </a>
+      <a class="cat-card" href="categoria.html?cat=Primeros Auxilios">
+        <span class="cat-icon">🩹</span>
+        <span class="cat-label">Primeros Auxilios</span>
+        <span class="cat-arrow">→</span>
+      </a>
+      <a class="cat-card" href="categoria.html?cat=Área de Alimentos">
+        <span class="cat-icon">🍽️</span>
+        <span class="cat-label">Área de Alimentos</span>
+        <span class="cat-arrow">→</span>
+      </a>
+      <a class="cat-card" href="categoria.html?cat=Aseo">
+        <span class="cat-icon">🧹</span>
+        <span class="cat-label">Aseo</span>
+        <span class="cat-arrow">→</span>
+      </a>
+      <a class="cat-card" href="categoria.html?cat=Dotación">
+        <span class="cat-icon">👔</span>
+        <span class="cat-label">Dotación</span>
+        <span class="cat-arrow">→</span>
+      </a>
+    </div>
   </div>
 </section>
-
-
 
 <!-- ──── FOOTER ──── -->
 <footer id="contacto">
@@ -121,27 +194,25 @@
         <div class="footer-logo">Compros<span>COL</span></div>
         <p class="footer-desc">Empresa familiar comprometida con la seguridad y salud de tus trabajadores. Ofrecemos productos certificados y asesoría especializada.</p>
         <p style="margin-top:.75rem;font-size:.82rem;color:var(--naranja)">📍 Calle 25 #58-10 Medellín, Antioquia</p>
-        <p style="font-size:.82rem;margin-top:.25rem">📞 (+57) 304 5400512 </p>
+        <p style="font-size:.82rem;margin-top:.25rem">📞 (+57) 304 5400512</p>
         <p style="font-size:.82rem;margin-top:.25rem">✉️ admoncompros@gmail.com</p>
       </div>
       <div class="footer-col">
         <h5>Productos</h5>
         <ul>
-          <li><a href="#">Protección Craneal</a></li>
-          <li><a href="#">Protección Visual</a></li>
-          <li><a href="#">Protección Manual</a></li>
-          <li><a href="#">Calzado de Seguridad</a></li>
-          <li><a href="#">Señalización</a></li>
+          <li><a href="categoria.html?cat=Protección Craneal">Protección Craneal</a></li>
+          <li><a href="categoria.html?cat=Protección Visual">Protección Visual</a></li>
+          <li><a href="categoria.html?cat=Protección Manual">Protección Manual</a></li>
+          <li><a href="categoria.html?cat=Calzado de Seguridad">Calzado de Seguridad</a></li>
+          <li><a href="categoria.html?cat=Señalización">Señalización</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h5>Empresa</h5>
         <ul>
           <li><a href="nosotros.html">Nosotros</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Catálogos</a></li>
           <li><a href="nuestros-asesores.html">Nuestros Asesores</a></li>
-          <li><a href="#">Contacto</a></li>
+          <li><a href="#contacto">Contacto</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -162,32 +233,35 @@
   </div>
 </footer>
 
-<!-- WhatsApp flotante -->
 <a class="wa-float" href="https://wa.me/573045400512" target="_blank" title="Escríbenos por WhatsApp">💬</a>
 
-<!-- ──── MODAL ──── -->
-<div class="modal-overlay" id="modal">
-  <div class="modal-box">
-    <button class="modal-close-btn" onclick="cerrarModal()">✕</button>
-    <div class="modal-img-placeholder" id="m-img"></div>
-    <div class="modal-content">
-      <div class="modal-cat-tag" id="m-cat"></div>
-      <h3 class="modal-title" id="m-name"></h3>
-      <p class="modal-desc" id="m-desc"></p>
-      <div class="modal-specs-box">
-        <h4>Especificaciones técnicas</h4>
-        <div id="m-specs"></div>
-      </div>
-      <div class="modal-actions">
-        <button class="modal-wa" onclick="abrirWA()">💬 Pedir por WhatsApp</button>
-        <button class="modal-consult" onclick="consultarIA()">Consultar ↗</button>
-      </div>
-    </div>
-  </div>
-</div>
+<script>
+// Hamburguesa
+function toggleMenu() {
+  const links = document.getElementById('navLinks');
+  const overlay = document.getElementById('navOverlay');
+  const ham = document.getElementById('hamburger');
+  links.classList.toggle('open');
+  overlay.classList.toggle('open');
+  ham.classList.toggle('open');
+}
 
-<script src="productos.js"></script>
-<script src="app.js"></script>
+// Mega menú en móvil
+function toggleMega(e) {
+  if (window.innerWidth > 768) return;
+  e.preventDefault();
+  const li = e.currentTarget.parentElement;
+  li.classList.toggle('mega-open');
+}
 
+// Búsqueda (redirige a categoria si escribe algo)
+function buscar() {
+  const q = document.getElementById('heroSearch').value.trim();
+  if (q) window.location.href = 'categoria.html?q=' + encodeURIComponent(q);
+}
+document.getElementById('heroSearch').addEventListener('keyup', e => {
+  if (e.key === 'Enter') buscar();
+});
+</script>
 </body>
 </html>
