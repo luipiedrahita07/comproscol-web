@@ -330,7 +330,7 @@ footer .container{max-width:1200px;margin:0 auto}
 
 /* WhatsApp flotante */
 .wa-float{
-  position:fixed;bottom:24px;right:24px;z-index:999;
+  position:fixed;bottom:80px;right:24px;z-index:999;
   width:56px;height:56px;border-radius:50%;
   background:#25D366;color:#fff;
   font-size:1.6rem;display:flex;align-items:center;justify-content:center;
