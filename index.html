@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Comproscol – Implementos de Seguridad Y Salud en el Trabajo</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<!-- ──── NAV ──── -->
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="#">COMPROS<span>COL</span></a>
+    <ul class="nav-links">
+      <li class="active"><a href="#">Inicio</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li>
+        <a href="#">Productos <span class="chevron">▾</span></a>
+        <div class="mega-menu">
+          <div class="mega-col">
+            <h4>Categorías</h4>
+            <ul>
+              <li><a href="categoria.html?cat=Calzado de Seguridad">Calzado de Seguridad</a></li>
+              <li><a href="categoria.html?cat=Protección Craneal">Protección Craneal</a></li>
+              <li><a href="categoria.html?cat=Protección Visual">Protección Visual</a></li>
+              <li><a href="categoria.html?cat=Protección Manual">Protección Manual</a></li>
+              <li><a href="categoria.html?cat=Protección Corporal">Protección Corporal</a></li>
+              <li><a href="categoria.html?cat=Protección Respiratoria">Protección Respiratoria</a></li>
+              <li><a href="categoria.html?cat=Protección Auditiva">Protección Auditiva</a></li>
+              <li><a href="categoria.html?cat=Trabajo en Alturas">Trabajo en Alturas</a></li>
+              <li><a href="categoria.html?cat=Señalización">Señalización</a></li>
+              <li><a href="categoria.html?cat=Primeros Auxilios">Primeros Auxilios</a></li>
+              <li><a href="categoria.html?cat=Área de Alimentos">Área de Alimentos</a></li>
+              <li><a href="categoria.html?cat=Aseo">Aseo</a></li>
+              <li><a href="categoria.html?cat=Dotación">Dotación</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4>Marcas</h4>
+            <ul>
+              <li><a href="#">3M</a></li>
+              <li><a href="#">Ansell</a></li>
+              <li><a href="#">Sosega</a></li>
+              <li><a href="#">Petzl</a></li>
+              <li><a href="#">MSA Safety</a></li>
+              <li><a href="#">DuPont</a></li>
+              <li><a href="#">Kondor</a></li>
+              <li><a href="#">Kastako</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4>Sectores</h4>
+            <ul>
+              <li><a href="#">Construcción</a></li>
+              <li><a href="#">IndustriaL</a></li>
+              <li><a href="#">Alimentos</a></li>
+              <li><a href="#">Logística</a></li>
+              <li><a href="#">Salud</a></li>
+              <li><a href="#">Agro</a></li>
+              <li><a href="#">Manufactura</a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li><a href="#">Catálogo</a></li>
+      <li><a href="#">Contacto</a></li>
+      <li><a href="nuestros-asesores.html">Nuestros Asesores</a></li>
+      <li><a href="login.html">Admin</a></li>
+    </ul>
+    <div class="nav-search">
+      <input type="text" placeholder="Buscar productos…" id="heroSearch"/>
+      <button onclick="buscar()">🔍</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ──── HERO ──── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-shape"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Líderes en SST – Colombia</div>
+    <h1>Acompañamiento<br>en <em>todo</em><br>momento</h1>
+    <p>Ofrecemos capacitación, apoyo y soluciones de seguridad con profesionales certificados, para mejorar la cultura SST dentro de tu empresa.</p>
+    <div class="hero-btns">
+      <a href="#catalogo" class="btn-primary">Ver catálogo</a>
+      <a href="#contacto" class="btn-secondary">¡Contáctanos!</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><strong>+500</strong><span>Productos</span></div>
+      <div class="stat"><strong>+400</strong><span>Clientes fieles, entre ellos EPM y METROPLUS</span></div>
+      <div class="stat"><strong>+5</strong><span>Años de exp.</span></div>
+      <div class="stat"><strong>100%</strong><span>Certificados</span></div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ──── CATÁLOGO ──── -->
+<section class="catalogo" id="catalogo">
+  <div class="container">
+    <div class="catalogo-header">
+      <div>
+        <h2 class="section-title" style="text-align:left;font-size:1.8rem">Nuestros Productos</h2>
+        <p style="color:var(--gris-medio);font-size:.85rem" id="conteo">Mostrando todos los productos</p>
+      </div>
+      <div class="cat-filters" id="filtros"></div>
+    </div>
+    <div class="productos-grid" id="grid"></div>
+  </div>
+</section>
+
+
+
+<!-- ──── FOOTER ──── -->
+<footer id="contacto">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Compros<span>COL</span></div>
+        <p class="footer-desc">Empresa familiar comprometida con la seguridad y salud de tus trabajadores. Ofrecemos productos certificados y asesoría especializada.</p>
+        <p style="margin-top:.75rem;font-size:.82rem;color:var(--naranja)">📍 Calle 25 #58-10 Medellín, Antioquia</p>
+        <p style="font-size:.82rem;margin-top:.25rem">📞 (+57) 304 5400512 </p>
+        <p style="font-size:.82rem;margin-top:.25rem">✉️ admoncompros@gmail.com</p>
+      </div>
+      <div class="footer-col">
+        <h5>Productos</h5>
+        <ul>
+          <li><a href="#">Protección Craneal</a></li>
+          <li><a href="#">Protección Visual</a></li>
+          <li><a href="#">Protección Manual</a></li>
+          <li><a href="#">Calzado de Seguridad</a></li>
+          <li><a href="#">Señalización</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Empresa</h5>
+        <ul>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Catálogos</a></li>
+          <li><a href="nuestros-asesores.html">Nuestros Asesores</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Sectores</h5>
+        <ul>
+          <li><a href="#">Construcción</a></li>
+          <li><a href="#">Industria</a></li>
+          <li><a href="#">Minería</a></li>
+          <li><a href="#">Alimentos</a></li>
+          <li><a href="#">Salud</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Comproscol</span>
+      <span>Medellín, Colombia</span>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp flotante -->
+<a class="wa-float" href="https://wa.me/573045400512" target="_blank" title="Escríbenos por WhatsApp">💬</a>
+
+<!-- ──── MODAL ──── -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <button class="modal-close-btn" onclick="cerrarModal()">✕</button>
+    <div class="modal-img-placeholder" id="m-img"></div>
+    <div class="modal-content">
+      <div class="modal-cat-tag" id="m-cat"></div>
+      <h3 class="modal-title" id="m-name"></h3>
+      <p class="modal-desc" id="m-desc"></p>
+      <div class="modal-specs-box">
+        <h4>Especificaciones técnicas</h4>
+        <div id="m-specs"></div>
+      </div>
+      <div class="modal-actions">
+        <button class="modal-wa" onclick="abrirWA()">💬 Pedir por WhatsApp</button>
+        <button class="modal-consult" onclick="consultarIA()">Consultar ↗</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="productos.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>

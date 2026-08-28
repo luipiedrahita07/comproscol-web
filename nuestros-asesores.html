@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Comproscol – Implementos de Seguridad Y Salud en el Trabajo</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="stylesns.css"/>
+ <style>*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --naranja:#E8401A;
+  --naranja-dark:#C23210;
+  --naranja-light:#FF6B3D;
+  --gris-oscuro:#1A1A1A;
+  --gris-medio:#4A4A4A;
+  --gris-claro:#F5F5F3;
+  --blanco:#FFFFFF;
+  --borde:#E0E0E0;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Barlow',sans-serif;color:var(--gris-oscuro);background:#fff}
+
+/* ──── NAVBAR ──── */
+nav{
+  position:sticky;top:0;z-index:1000;
+  background:#fff;
+  border-bottom:2px solid var(--borde);
+  box-shadow:0 2px 12px rgba(0,0,0,.07)
+}
+.nav-inner{
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;gap:0;
+  padding:0 1.5rem;height:64px
+}
+.logo{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:2rem;font-weight:800;
+  color:var(--naranja);
+  text-decoration:none;letter-spacing:-1px;
+  margin-right:2.5rem;flex-shrink:0
+}
+.logo span{color:var(--gris-oscuro)}
+.nav-links{display:flex;align-items:stretch;list-style:none;height:64px;flex:1}
+.nav-links > li{position:relative;display:flex;align-items:center}
+.nav-links > li > a{
+  display:flex;align-items:center;gap:5px;
+  padding:0 1rem;height:100%;
+  font-size:.8rem;font-weight:600;letter-spacing:.8px;
+  text-transform:uppercase;text-decoration:none;
+  color:var(--gris-medio);transition:color .2s
+}
+.nav-links > li > a:hover,
+.nav-links > li.active > a{color:var(--naranja)}
+.nav-links > li > a .chevron{
+  font-size:.6rem;transition:transform .25s;display:inline-block
+}
+.nav-links > li:hover > a .chevron{transform:rotate(180deg)}
+
+/* Mega menú */
+.mega-menu{
+  display:none;position:absolute;top:64px;left:50%;transform:translateX(-50%);
+  background:#fff;border-top:3px solid var(--naranja);
+  box-shadow:0 12px 40px rgba(0,0,0,.13);
+  min-width:780px;padding:2rem;
+  border-radius:0 0 8px 8px;
+  animation:fadeDown .2s ease
+}
+@keyframes fadeDown{from{opacity:0;transform:translateX(-50%) translateY(-8px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+.nav-links > li:hover .mega-menu{display:flex}
+.mega-col h4{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1rem;font-weight:700;letter-spacing:.5px;
+  color:var(--naranja);text-transform:uppercase;
+  margin-bottom:1rem;border-bottom:1.5px solid var(--borde);padding-bottom:.5rem
+}
+.mega-col{flex:1}
+.mega-col ul{list-style:none}
+.mega-col ul li{padding:4px 0}
+.mega-col ul li a{
+  font-size:.82rem;color:var(--gris-medio);text-decoration:none;
+  display:flex;align-items:center;gap:6px;transition:color .15s
+}
+.mega-col ul li a::before{content:'›';color:var(--naranja);font-weight:700}
+.mega-col ul li a:hover{color:var(--naranja)}
+
+/* Search */
+.nav-search{
+  display:flex;align-items:center;margin-left:auto;
+  border:1.5px solid var(--borde);border-radius:6px;overflow:hidden
+}
+.nav-search input{
+  border:none;outline:none;padding:7px 14px;font-size:.82rem;
+  font-family:'Barlow',sans-serif;width:180px;color:var(--gris-oscuro)
+}
+.nav-search button{
+  background:var(--naranja);border:none;padding:7px 14px;cursor:pointer;color:#fff;font-size:1rem
+}
+.nav-search button:hover{background:var(--naranja-dark)}
+
+/* ──── HERO ──── */
+.hero{
+  position:relative;overflow:hidden;
+  background:linear-gradient(100deg, #1A1A1A 0%, #2d1008 55%, transparent 100%);
+  min-height:520px;display:flex;align-items:center
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1400&q=80') center/cover no-repeat;
+  opacity:.35
+}
+.hero-shape{
+  position:absolute;right:0;top:0;bottom:0;width:48%;
+  background:var(--naranja);clip-path:polygon(18% 0,100% 0,100% 100%,0% 100%);
+  opacity:.18
+}
+.hero-content{
+  position:relative;z-index:2;
+  max-width:1200px;margin:0 auto;padding:5rem 1.5rem;
+}
+.hero-tag{
+  display:inline-block;background:var(--naranja);color:#fff;
+  font-family:'Barlow Condensed',sans-serif;font-size:.85rem;
+  font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  padding:5px 14px;border-radius:3px;margin-bottom:1.2rem
+}
+.hero-content h1{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(2.8rem,6vw,4.5rem);font-weight:800;
+  color:#fff;line-height:1;text-transform:uppercase;
+  margin-bottom:1rem;max-width:600px
+}
+.hero-content h1 em{color:var(--naranja);font-style:normal}
+.hero-content p{
+  color:rgba(255,255,255,.75);font-size:1rem;
+  line-height:1.7;max-width:480px;margin-bottom:2rem
+}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{
+  background:var(--naranja);color:#fff;
+  font-family:'Barlow',sans-serif;font-weight:600;font-size:.9rem;
+  padding:13px 28px;border-radius:5px;border:none;cursor:pointer;
+  text-decoration:none;transition:background .2s,transform .15s;display:inline-block
+}
+.btn-primary:hover{background:var(--naranja-dark);transform:translateY(-1px)}
+.btn-secondary{
+  background:transparent;color:#fff;
+  font-family:'Barlow',sans-serif;font-weight:600;font-size:.9rem;
+  padding:13px 28px;border-radius:5px;border:2px solid rgba(255,255,255,.5);
+  cursor:pointer;text-decoration:none;transition:all .2s;display:inline-block
+}
+.btn-secondary:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+
+/* Hero stats */
+.hero-stats{
+  display:flex;gap:2.5rem;margin-top:3rem;flex-wrap:wrap
+}
+.stat{color:#fff}
+.stat strong{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:2rem;font-weight:800;color:var(--naranja-light);display:block
+}
+.stat span{font-size:.8rem;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.5px}
+
+/* ──── SECTORES ──── */
+.sectores{background:#fff;padding:4rem 1.5rem}
+.sectores .container{max-width:1200px;margin:0 auto}
+.section-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:2.2rem;font-weight:700;
+  color:var(--naranja);text-align:center;margin-bottom:.5rem
+}
+.section-sub{text-align:center;color:var(--gris-medio);font-size:.95rem;margin-bottom:2.5rem}
+.sectores-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px
+}
+.sector-card{
+  position:relative;height:180px;border-radius:8px;overflow:hidden;cursor:pointer
+}
+.sector-card img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.sector-card:hover img{transform:scale(1.06)}
+.sector-card .sector-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,.75) 0%, rgba(0,0,0,.1) 60%);
+  display:flex;align-items:flex-end;padding:14px
+}
+.sector-card .sector-name{
+  color:#fff;font-family:'Barlow Condensed',sans-serif;
+  font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px
+}
+.sector-card .sector-tag{
+  position:absolute;top:10px;left:10px;
+  background:var(--naranja);color:#fff;
+  font-size:.65rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+  padding:3px 9px;border-radius:3px
+}
+
+/* ──── CATÁLOGO ──── */
+.catalogo{background:var(--gris-claro);padding:4rem 1.5rem}
+.catalogo .container{max-width:1200px;margin:0 auto}
+.catalogo-header{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1rem;margin-bottom:2rem
+}
+.cat-filters{display:flex;flex-wrap:wrap;gap:8px}
+.filter-btn{
+  padding:7px 16px;border-radius:20px;font-size:.8rem;font-weight:600;
+  border:1.5px solid var(--borde);background:#fff;
+  color:var(--gris-medio);cursor:pointer;transition:all .2s;
+  font-family:'Barlow',sans-serif
+}
+.filter-btn:hover,.filter-btn.active{
+  background:var(--naranja);color:#fff;border-color:var(--naranja)
+}
+.productos-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px
+}
+.prod-card{
+  background:#fff;border-radius:10px;border:1px solid var(--borde);
+  overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s
+}
+.prod-card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.1)}
+.prod-img{
+  width:100%;height:180px;object-fit:cover;display:block;
+  background:var(--gris-claro);position:relative;overflow:hidden
+}
+.prod-img-placeholder{
+  width:100%;height:180px;display:flex;align-items:center;justify-content:center;
+  font-size:4rem;background:linear-gradient(135deg,#f0f0f0,#e8e8e8)
+}
+.prod-badge{
+  position:absolute;top:10px;left:10px;
+  background:var(--naranja);color:#fff;
+  font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:3px;text-transform:uppercase
+}
+.prod-badge.agotado{background:#999}
+.prod-body{padding:14px 16px}
+.prod-cat{
+  font-size:.72rem;font-weight:700;color:var(--naranja);
+  text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px
+}
+.prod-name{font-size:.95rem;font-weight:600;line-height:1.35;margin-bottom:6px}
+.prod-desc{font-size:.8rem;color:var(--gris-medio);line-height:1.5;margin-bottom:12px}
+.prod-footer{display:flex;align-items:center;justify-content:space-between}
+.prod-norma{font-size:.72rem;color:var(--gris-medio);background:var(--gris-claro);padding:3px 9px;border-radius:20px}
+.prod-cta{
+  background:var(--naranja);color:#fff;border:none;
+  font-size:.78rem;font-weight:600;padding:7px 14px;border-radius:5px;
+  cursor:pointer;font-family:'Barlow',sans-serif;transition:background .2s
+}
+.prod-cta:hover{background:var(--naranja-dark)}
+
+/* ──── MARCAS ──── */
+.marcas{background:#fff;padding:3.5rem 1.5rem}
+.marcas .container{max-width:1200px;margin:0 auto}
+.marcas-strip{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;margin-top:2rem
+}
+.marca-pill{
+  background:var(--gris-claro);border:1px solid var(--borde);
+  border-radius:5px;padding:8px 20px;
+  font-size:.82rem;font-weight:600;color:var(--gris-medio);
+  cursor:pointer;transition:all .2s
+}
+.marca-pill:hover{background:var(--naranja);color:#fff;border-color:var(--naranja)}
+
+/* ──── MODAL ──── */
+.modal-overlay{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);
+  z-index:2000;align-items:center;justify-content:center;padding:1rem
+}
+.modal-overlay.open{display:flex}
+.modal-box{
+  background:#fff;border-radius:12px;width:100%;max-width:520px;
+  max-height:90vh;overflow-y:auto;position:relative
+}
+.modal-img{
+  width:100%;height:220px;object-fit:cover;border-radius:12px 12px 0 0
+}
+.modal-img-placeholder{
+  width:100%;height:220px;display:flex;align-items:center;justify-content:center;
+  font-size:5rem;background:linear-gradient(135deg,#f5f5f5,#e8e8e8);
+  border-radius:12px 12px 0 0
+}
+.modal-close-btn{
+  position:absolute;top:12px;right:14px;width:34px;height:34px;
+  background:rgba(0,0,0,.4);border:none;border-radius:50%;color:#fff;
+  font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center
+}
+.modal-content{padding:1.5rem}
+.modal-cat-tag{
+  display:inline-block;background:var(--naranja);color:#fff;
+  font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:3px;
+  text-transform:uppercase;letter-spacing:.5px;margin-bottom:.75rem
+}
+.modal-title{font-family:'Barlow Condensed',sans-serif;font-size:1.6rem;font-weight:700;margin-bottom:.5rem}
+.modal-desc{font-size:.9rem;color:var(--gris-medio);line-height:1.65;margin-bottom:1.25rem}
+.modal-specs-box{background:var(--gris-claro);border-radius:8px;padding:1rem 1.25rem;margin-bottom:1.25rem}
+.modal-specs-box h4{
+  font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;
+  color:var(--gris-medio);margin-bottom:.75rem
+}
+.spec-row{display:flex;justify-content:space-between;font-size:.84rem;padding:5px 0;border-bottom:1px solid var(--borde)}
+.spec-row:last-child{border:none}
+.spec-key{color:var(--gris-medio)}
+.spec-val{font-weight:600}
+.modal-actions{display:flex;gap:10px}
+.modal-wa{
+  flex:1;background:#25D366;color:#fff;border:none;
+  padding:12px;border-radius:7px;font-size:.88rem;font-weight:600;
+  cursor:pointer;font-family:'Barlow',sans-serif
+}
+.modal-consult{
+  flex:1;background:transparent;color:var(--naranja);
+  border:2px solid var(--naranja);padding:12px;border-radius:7px;
+  font-size:.88rem;font-weight:600;cursor:pointer;font-family:'Barlow',sans-serif
+}
+.modal-consult:hover{background:var(--naranja);color:#fff}
+
+/* ──── FOOTER ──── */
+footer{background:var(--gris-oscuro);color:rgba(255,255,255,.7);padding:3rem 1.5rem 1.5rem}
+footer .container{max-width:1200px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem}
+.footer-logo{font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:800;color:var(--naranja);margin-bottom:.75rem}
+.footer-logo span{color:#fff}
+.footer-desc{font-size:.82rem;line-height:1.65}
+.footer-col h5{
+  font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;
+  color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:1rem
+}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:.5rem}
+.footer-col ul li a{font-size:.82rem;color:rgba(255,255,255,.6);text-decoration:none;transition:color .15s}
+.footer-col ul li a:hover{color:var(--naranja)}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.1);padding-top:1.25rem;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.78rem
+}
+
+/* WhatsApp flotante */
+.wa-float{
+  position:fixed;bottom:24px;right:24px;z-index:999;
+  width:56px;height:56px;border-radius:50%;
+  background:#25D366;color:#fff;
+  font-size:1.6rem;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 16px rgba(37,211,102,.5);cursor:pointer;
+  text-decoration:none;transition:transform .2s
+}
+.wa-float:hover{transform:scale(1.1)}
+
+/* Responsive */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .hero-content h1{font-size:2.5rem}
+  .hero-stats{gap:1.5rem}
+}
+@media(max-width:480px){
+  .footer-grid{grid-template-columns:1fr}
+  .modal-actions{flex-direction:column}
+}
+
+/* ==========================================================================
+   NUEVA SECCIÓN: PÁGINA INDEPENDIENTE DE NOSOTROS
+   ========================================================================== */
+
+.pagina-nosotros {
+  background-color: var(--blanco);
+  color: var(--gris-oscuro);
+  padding: 5rem 1.5rem;
+}
+
+.container-nosotros {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.titulo-nosotros {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: .5px;
+  margin-bottom: 2.5rem;
+  color: var(--gris-oscuro);
+  text-transform: uppercase;
+}
+
+.resaltado-naranja {
+  color: var(--naranja);
+}
+
+.grid-nosotros {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .grid-nosotros {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+}
+
+.bloque-descripcion p {
+  font-family: 'Barlow', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--gris-medio);
+  margin-bottom: 1.5rem;
+}
+
+.bloque-descripcion strong {
+  color: var(--gris-oscuro);
+  font-weight: 600;
+}
+
+.bloque-pilares {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.tarjeta-pilar {
+  background-color: var(--gris-claro);
+  padding: 1.5rem;
+  border-left: 4px solid var(--naranja);
+  border-radius: 6px;
+  border-top: 1px solid var(--borde);
+  border-right: 1px solid var(--borde);
+  border-bottom: 1px solid var(--borde);
+}
+
+.tarjeta-pilar h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--gris-oscuro);
+  margin-bottom: .5rem;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+.tarjeta-pilar p {
+  font-family: 'Barlow', sans-serif;
+  font-size: .9rem;
+  color: var(--gris-medio);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ──── ASESORES ──── */
+.intro-asesores{
+  font-size:.95rem;color:var(--gris-medio);line-height:1.7;
+  max-width:680px;margin:0 auto 2.5rem;text-align:center
+}
+.grid-asesores{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:1.5rem;
+  max-width:960px;margin:0 auto
+}
+.tarjeta-asesor{
+  background:#fff;
+  border:1px solid var(--borde);
+  border-top:4px solid var(--naranja);
+  border-radius:10px;
+  padding:2rem 1.5rem;
+  text-align:center;
+  transition:box-shadow .2s,transform .2s;
+  display:flex;flex-direction:column;align-items:center;gap:.75rem
+}
+.tarjeta-asesor:hover{
+  box-shadow:0 10px 30px rgba(0,0,0,.1);
+  transform:translateY(-4px)
+}
+.asesor-avatar{
+  width:64px;height:64px;border-radius:50%;
+  background:var(--naranja);color:#fff;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1.4rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:.25rem
+}
+.tarjeta-asesor h3{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1.3rem;font-weight:700;
+  color:var(--gris-oscuro);text-transform:uppercase;letter-spacing:.5px;
+  margin:0
+}
+.tarjeta-asesor p{
+  font-size:.88rem;color:var(--gris-medio);
+  line-height:1.6;margin:0;flex:1
+}
+.asesor-wa{
+  display:inline-block;margin-top:.5rem;
+  background:#25D366;color:#fff;
+  padding:8px 20px;border-radius:20px;
+  font-size:.82rem;font-weight:700;text-decoration:none;
+  transition:background .2s
+}
+.asesor-wa:hover{background:#1ebe5d}
+</style>
+</head>
+<body>
+
+<!-- ──── NAV ──── -->
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="index.html">COMPROS<span>COL</span></a>
+    <ul class="nav-links">
+      <li class="active"><a href="index.html">Inicio</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li>
+        <a href="#">Productos <span class="chevron">▾</span></a>
+        <div class="mega-menu">
+          <div class="mega-col">
+            <h4>Categorías</h4>
+            <ul>
+              <li><a href="categoria.html?cat=Calzado de Seguridad">Calzado de Seguridad</a></li>
+              <li><a href="categoria.html?cat=Protección Craneal">Protección Craneal</a></li>
+              <li><a href="categoria.html?cat=Protección Visual">Protección Visual</a></li>
+              <li><a href="categoria.html?cat=Protección Manual">Protección Manual</a></li>
+              <li><a href="categoria.html?cat=Protección Corporal">Protección Corporal</a></li>
+              <li><a href="categoria.html?cat=Protección Respiratoria">Protección Respiratoria</a></li>
+              <li><a href="categoria.html?cat=Protección Auditiva">Protección Auditiva</a></li>
+              <li><a href="categoria.html?cat=Trabajo en Alturas">Trabajo en Alturas</a></li>
+              <li><a href="categoria.html?cat=Señalización">Señalización</a></li>
+              <li><a href="categoria.html?cat=Primeros Auxilios">Primeros Auxilios</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4>Marcas</h4>
+            <ul>
+              <li><a href="#">3M</a></li>
+              <li><a href="#">Ansell</a></li>
+              <li><a href="#">Sosega</a></li>
+              <li><a href="#">Petzl</a></li>
+              <li><a href="#">MSA Safety</a></li>
+              <li><a href="#">DuPont</a></li>
+              <li><a href="#">Kondor</a></li>
+              <li><a href="#">Kastako</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4>Sectores</h4>
+            <ul>
+              <li><a href="#">Construcción</a></li>
+              <li><a href="#">IndustriaL</a></li>
+              <li><a href="#">Alimentos</a></li>
+              <li><a href="#">Logística</a></li>
+              <li><a href="#">Salud</a></li>
+              <li><a href="#">Agro</a></li>
+              <li><a href="#">Manufactura</a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li><a href="#">Catálogo</a></li>
+      <li><a href="nuestros-asesores.html" class="active">Nuestros Asesores</a></li>
+    </ul>
+    <div class="nav-search">
+      <input type="text" placeholder="Buscar productos…" id="heroSearch"/>
+      <button onclick="buscar()">🔍</button>
+    </div>
+  </div>
+</nav>
+
+<main class="pagina-nosotros">
+  <div class="container-nosotros">
+
+    <h1 class="titulo-nosotros">Nuestros <span class="resaltado-naranja">Asesores</span></h1>
+
+    <p class="intro-asesores">En <strong>Comproscol</strong> tenemos un equipo de asesores especializados en seguridad y salud en el trabajo, dedicados a brindar soluciones integrales según las necesidades de cada sector.</p>
+
+    <div class="grid-asesores">
+
+      <div class="tarjeta-asesor">
+        <div class="asesor-avatar">RM</div>
+        <h3>Richard Mejía</h3>
+        <p>Nuestro equipo se especializa en proporcionar asesoría integral para la gestión de seguridad y salud en el trabajo.</p>
+        <a class="asesor-wa" href="https://wa.me/573045400512?text=Hola%20Richard%2C%20quisiera%20recibir%20asesoría" target="_blank">💬 Contactar</a>
+      </div>
+
+      <div class="tarjeta-asesor">
+        <div class="asesor-avatar">MM</div>
+        <h3>Mónica Mejía</h3>
+        <p>Ofrecemos implementos que cumplen rigurosamente con estándares nacionales de SST y normativas de seguridad internacional.</p>
+        <a class="asesor-wa" href="https://wa.me/573045400512?text=Hola%20Mónica%2C%20quisiera%20recibir%20asesoría" target="_blank">💬 Contactar</a>
+      </div>
+
+      <div class="tarjeta-asesor">
+        <div class="asesor-avatar">GB</div>
+        <h3>Giovanni Betancur</h3>
+        <p>No solo vendemos equipos; acompañamos la gestión de riesgo técnico de su empresa sugiriendo la solución idónea según cada sector económico.</p>
+        <a class="asesor-wa" href="https://wa.me/573045400512?text=Hola%20Giovanni%2C%20quisiera%20recibir%20asesoría" target="_blank">💬 Contactar</a>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- ──── FOOTER ──── -->
+<footer id="contacto">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">COMPROS<span>COL</span></div>
+        <p class="footer-desc">Empresa familiar comprometida con la seguridad y salud de tus trabajadores. Ofrecemos productos certificados y asesoría especializada.</p>
+        <p style="margin-top:.75rem;font-size:.82rem;color:var(--naranja)">📍 Calle 25 #58-10 Medellín, Antioquia</p>
+        <p style="font-size:.82rem;margin-top:.25rem">📞 (+57) 304 5400512 </p>
+        <p style="font-size:.82rem;margin-top:.25rem">✉️ admoncompros@gmail.com</p>
+      </div>
+      <div class="footer-col">
+        <h5>Productos</h5>
+        <ul>
+          <li><a href="categoria.html?cat=Protección Craneal">Protección Craneal</a></li>
+          <li><a href="categoria.html?cat=Protección Visual">Protección Visual</a></li>
+          <li><a href="categoria.html?cat=Protección Manual">Protección Manual</a></li>
+          <li><a href="categoria.html?cat=Calzado de Seguridad">Calzado de Seguridad</a></li>
+          <li><a href="categoria.html?cat=Señalización">Señalización</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Empresa</h5>
+        <ul>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="catalogo.html">Catálogos</a></li>
+          <li><a href="#">Nuestros Asesores</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Sectores</h5>
+        <ul>
+          <li><a href="#">Construcción</a></li>
+          <li><a href="#">Industria</a></li>
+          <li><a href="#">Minería</a></li>
+          <li><a href="#">Alimentos</a></li>
+          <li><a href="#">Salud</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>2025 Comproscol</span>
+      <span>Medellín, Colombia</span>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp flotante -->
+<a class="wa-float" href="https://wa.me/573045400512" target="_blank" title="Escríbenos por WhatsApp">💬</a>
+
+<!-- ──── MODAL ──── -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <button class="modal-close-btn" onclick="cerrarModal()">✕</button>
+    <div class="modal-img-placeholder" id="m-img"></div>
+    <div class="modal-content">
+      <div class="modal-cat-tag" id="m-cat"></div>
+      <h3 class="modal-title" id="m-name"></h3>
+      <p class="modal-desc" id="m-desc"></p>
+      <div class="modal-specs-box">
+        <h4>Especificaciones técnicas</h4>
+        <div id="m-specs"></div>
+      </div>
+      <div class="modal-actions">
+        <button class="modal-wa" onclick="abrirWA()">💬 Pedir por WhatsApp</button>
+        <button class="modal-consult" onclick="consultarIA()">Consultar ↗</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
