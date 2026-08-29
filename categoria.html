@@ -485,7 +485,7 @@ document.getElementById('modal').addEventListener('click', e => {
 
 function abrirWA() {
   const p = productoActual;
-  const msg = encodeURIComponent(`Hola, estoy interesado en: *${p.nombre}* (${p.cat}). ¿Me pueden dar más información?`);
+  const msg = encodeURIComponent(`Hola, estoy interesado en: ${p.nombre} (${p.cat}). ¿Me pueden dar más información?`);
   window.open(`https://wa.me/573115428062?text=${msg}`, '_blank');
 }
 
