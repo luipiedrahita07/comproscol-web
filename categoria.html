@@ -402,7 +402,7 @@ function renderCat(lista) {
     // CORRECCIÓN: Detecta la primera foto del carrusel nuevo o la foto única vieja
     const fotoPortada = (p.imagenes && p.imagenes.length > 0) ? p.imagenes[0] : p.img;
     const imgHtml = fotoPortada
-      ? `<img src="${fotoPortada}" alt="${p.nombre}" style="width:100%;height:180px;object-fit:cover;display:block;"/>`
+      ? `<img src="${fotoPortada}" alt="${p.nombre}" style="width:100%;height:180px;object-fit:cover;display:block;"/ loading="lazy">`
       : `<div class="prod-img-placeholder">${p.emoji || '📦'}</div>`;
       
     const norma = (p.specs && p.specs.length) ? `<span class="prod-norma">${p.specs[0][1]}</span>` : '<span></span>';
@@ -452,10 +452,10 @@ function abrirModal(id) {
     mImg.classList.add('modal-gallery-container');
     if (p.imagenes && p.imagenes.length > 0) {
       // Si el producto tiene el array de fotos del administrador, las mapea todas
-      mImg.innerHTML = p.imagenes.map(img => `<img src="${img}" alt="${p.nombre}" class="modal-slide-img"/>`).join('');
+      mImg.innerHTML = p.imagenes.map(img => `<img src="${img}" alt="${p.nombre}" class="modal-slide-img"/ loading="lazy">`).join('');
     } else {
       // Caso de una sola imagen antigua
-      mImg.innerHTML = `<img src="${p.img}" alt="${p.nombre}" class="modal-slide-img"/>`;
+      mImg.innerHTML = `<img src="${p.img}" alt="${p.nombre}" class="modal-slide-img"/ loading="lazy">`;
     }
     mImg.style.fontSize = '';
   } else {
