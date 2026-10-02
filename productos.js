@@ -8,8 +8,7 @@ const productos = [
     emoji: "📦",
     stock: true,
     specs: []
-  }
-];
+  },
   {
     "id": 5,
     "nombre": "Conos",
