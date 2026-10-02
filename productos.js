@@ -1604,7 +1604,7 @@ const productos = [
     "cat": "Señalización",
     "desc": "Buzón de sugerencias metálico de alta visibilidad, ideal para la recolección de reportes de condiciones inseguras, sugerencias y reportes de actos subestándar en el entorno laboral.",
     "imagenes": [
-      "https://i.ibb.co/BHYYYPd7/IMG-2897-1.jpg"
+      "imagenes/IMG_2426.jpg"
     ],
     "emoji": "📦",
     "stock": true,
