@@ -4,12 +4,11 @@ const productos = [
     "nombre": "Casco eco con rachet amarillo",
     "cat": "Protección Craneal",
     "desc": "Para Proteccion craneal",
+    "img": "Casco Eco con Rachet Amarillo.jpg",
     "emoji": "📦",
     "stock": true,
     "specs": [],
-    "imagenes": [
-      "Casco Eco con Rachet Amarillo.jpg"
-    ]
+
   },
   {
     "id": 5,
