@@ -10,7 +10,6 @@ if (src) {
   const ruta = src.startsWith('http') ? src : 'imagenes/' + src;
   return `<img src="${ruta}" alt="${p.nombre}" loading="lazy" style="width:100%;height:${height};object-fit:cover;display:block"/>`;
 }
-  return `<div class="prod-img-placeholder">${p.emoji || '📦'}</div>`;
 }
 
 // Filtros

@@ -450,12 +450,17 @@ function abrirModal(id) {
   
   if ((p.imagenes && p.imagenes.length > 0) || p.img) {
     mImg.classList.add('modal-gallery-container');
+   
     if (p.imagenes && p.imagenes.length > 0) {
       // Si el producto tiene el array de fotos del administrador, las mapea todas
-      mImg.innerHTML = p.imagenes.map(img => `<img src="${img}" alt="${p.nombre}" class="modal-slide-img"/ loading="lazy">`).join('');
+      mImg.innerHTML = p.imagenes.map(img => {
+      const ruta = img.startsWith('http') ? img : 'imagenes/' + img;
+      return `<img src="${ruta}" alt="${p.nombre}" class="modal-slide-img" loading="lazy">`;
+    }).join('');
     } else {
       // Caso de una sola imagen antigua
-      mImg.innerHTML = `<img src="${p.img}" alt="${p.nombre}" class="modal-slide-img"/ loading="lazy">`;
+      const ruta = p.img.startsWith('http') ? p.img : 'imagenes/' + p.img;
+      mImg.innerHTML = `<img src="${ruta}" alt="${p.nombre}" class="modal-slide-img" loading="lazy">`;
     }
     mImg.style.fontSize = '';
   } else {
