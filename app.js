@@ -2,9 +2,20 @@ const categorias = ['Todos', ...new Set(productos.map(p => p.cat))];
 let filtroActivo = 'Todos';
 let productoActual = null;
 
-// Helper imagen
+// Helper imagen — prioridad: imagenes[] local > emoji
+function getSrc(nombre) {
+  if (!nombre) return '';
+  // Si ya es una URL completa (http/https), ignorar — usar solo rutas locales
+  if (nombre.startsWith('http')) return '';
+  // Si ya tiene el prefijo imagenes/, usarlo tal cual
+  if (nombre.startsWith('imagenes/')) return nombre;
+  // Si es solo el nombre del archivo, agregar el prefijo
+  return 'imagenes/' + nombre;
+}
+
 function imgHtml(p, height = '180px') {
-  const src = (p.imagenes && p.imagenes[0]) || p.img || '';
+  const nombre = (p.imagenes && p.imagenes.find(i => i && !i.startsWith('http'))) || '';
+  const src = getSrc(nombre);
   if (src) return `<img src="${src}" alt="${p.nombre}" loading="lazy" style="width:100%;height:${height};object-fit:cover;display:block"/>`;
   return `<div class="prod-img-placeholder">${p.emoji || '📦'}</div>`;
 }
@@ -61,7 +72,8 @@ function abrirModal(id) {
 
   // Imagen en el modal
   const mImg = document.getElementById('m-img');
-  const src = (p.imagenes && p.imagenes[0]) || p.img || '';
+  const nombre = (p.imagenes && p.imagenes.find(i => i && !i.startsWith('http'))) || '';
+  const src = getSrc(nombre);
   if (src) {
     mImg.innerHTML = `<img src="${src}" alt="${p.nombre}" loading="lazy" style="width:100%;height:220px;object-fit:cover;border-radius:12px 12px 0 0;display:block"/>`;
     mImg.style.fontSize = '';
