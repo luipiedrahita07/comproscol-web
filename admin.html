@@ -322,12 +322,14 @@ header{
 
     <div class="form-group">
       <label>Imágenes del producto (Máx. 5)</label>
-      <div class="drop-zone" id="dropZone">
-        <span class="drop-icon">📁</span>
-        <span class="drop-text">Haz clic o arrastra imágenes aquí</span>
-        <span class="drop-sub">JPG · PNG · WEBP — se comprimen automáticamente</span>
-        <input type="file" id="fImgFile" accept="image/*" multiple style="display:none"/>
+      <div style="background:#fff8f5;border:1.5px solid #ffd5c8;border-radius:6px;padding:10px 14px;font-size:.8rem;color:#666;margin-bottom:.6rem;line-height:1.6">
+        📁 Pon las fotos en la carpeta <strong style="color:#E8401A">imagenes/</strong> de tu proyecto y escribe el nombre aquí
       </div>
+      <div id="imgInputsWrap"></div>
+      <button type="button" onclick="agregarCampoImg()" id="btnAddImg"
+        style="width:100%;background:none;border:1.5px dashed #E0E0E0;border-radius:5px;padding:7px;font-size:.78rem;font-weight:600;color:#888;cursor:pointer;font-family:Barlow,sans-serif;margin-top:4px">
+        + Agregar foto
+      </button>
       <div class="img-preview-gallery" id="imgPreviewWrap"></div>
     </div>
 
@@ -396,87 +398,58 @@ const KEY = 'comproscol_productos';
 const cargar = () => { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch { return []; } };
 const guardarLS = arr => localStorage.setItem(KEY, JSON.stringify(arr));
 
-// ── IMAGEN: compresión desde dispositivo ──
-const MAX_W = 600, MAX_KB = 40;
-
-function comprimirImagen(file, cb) {
-  const reader = new FileReader();
-  reader.onload = e => {
-    const img = new Image();
-    img.onload = () => {
-      let w = img.width, h = img.height;
-      if (w > MAX_W) { h = Math.round(h * MAX_W / w); w = MAX_W; }
-      const canvas = document.createElement('canvas');
-      canvas.width = w; canvas.height = h;
-      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-      let q = 0.85, b64 = canvas.toDataURL('image/jpeg', q);
-      while (b64.length > MAX_KB * 1024 * 1.37 && q > 0.3) {
-        q -= 0.1;
-        b64 = canvas.toDataURL('image/jpeg', q);
-      }
-      cb(b64);
-    };
-    img.src = e.target.result;
-  };
-  reader.readAsDataURL(file);
-}
-
-// ── MANEJO DE MÚLTIPLES IMÁGENES (NUEVO) ──
+// ── MANEJO DE IMÁGENES POR NOMBRE DE ARCHIVO ──
 let imagenesActuales = [];
 
-function renderizarGaleria() {
-  const wrap = document.getElementById('imgPreviewWrap');
-  const dz = document.getElementById('dropZone');
-  
-  wrap.innerHTML = imagenesActuales.map((imgB64, index) => `
-    <div class="img-thumb-wrap">
-      <img src="${imgB64}" alt="preview ${index + 1}"/>
-      <button type="button" class="img-thumb-remove" onclick="quitarImagenIndex(${index})">✕</button>
-    </div>
-  `).join('');
+function agregarCampoImg() {
+  if (imagenesActuales.length >= 5) { toast('⚠️ Máximo 5 fotos', true); return; }
+  imagenesActuales.push('');
+  renderizarGaleria();
+}
 
-  // Ocultar dropzone si ya alcanzamos las 5 imágenes
-  dz.style.display = imagenesActuales.length >= 5 ? 'none' : 'block';
+function actualizarNombre(i, val) {
+  imagenesActuales[i] = val.trim();
+  // actualizar preview
+  const prev = document.getElementById('prev_' + i);
+  if (prev) {
+    if (val.trim()) {
+      prev.src = 'imagenes/' + val.trim();
+      prev.style.display = 'block';
+    } else {
+      prev.style.display = 'none';
+    }
+  }
 }
 
 function quitarImagenIndex(index) {
   imagenesActuales.splice(index, 1);
   renderizarGaleria();
-  document.getElementById('fImgFile').value = ''; 
 }
 
-function procesarArchivos(files) {
-  const API_KEY = 'e50d23f6c639d45bdc1c30bdee995768'; // ← Asegúrate de que tenga tu clave
-  
-  Array.from(files).forEach(file => {
-    if (imagenesActuales.length >= 5) {
-      toast('⚠️ Máximo 5 imágenes permitidas', true);
-      return;
-    }
-    
-    if (file && file.type.startsWith('image/')) {
-      const formData = new FormData();
-      formData.append('image', file);
+function renderizarGaleria() {
+  const wrap = document.getElementById('imgInputsWrap');
+  const prevWrap = document.getElementById('imgPreviewWrap');
+  const btn = document.getElementById('btnAddImg');
 
-      fetch(`https://api.imgbb.com/1/upload?key=${API_KEY}`, {
-        method: 'POST',
-        body: formData
-      })
-      .then(res => {
-        if (!res.ok) throw new Error('Error al subir');
-        return res.json();
-      })
-      .then(response => {
-        const urlInternet = response.data.url;
-        imagenesActuales.push(urlInternet);
-        renderizarGaleria();
-      })
-      .catch(err => {
-        console.error(err);
-        alert('❌ No se pudo subir la imagen.');
-      });
-    }
-  });
+  wrap.innerHTML = imagenesActuales.map((nombre, i) => `
+    <div style="display:flex;gap:6px;align-items:center;margin-bottom:6px">
+      <input type="text" value="${nombre}" placeholder="nombre-foto.jpg"
+        style="flex:1;padding:8px 10px;border:1.5px solid #E0E0E0;border-radius:6px;font-family:Barlow,sans-serif;font-size:.85rem"
+        oninput="actualizarNombre(${i}, this.value)"
+        onblur="imagenesActuales[${i}]=this.value.trim();renderizarGaleria()"/>
+      <button type="button" onclick="quitarImagenIndex(${i})"
+        style="padding:6px 10px;border:none;background:#fff0f0;color:#e53;border-radius:5px;font-weight:700;cursor:pointer">✕</button>
+    </div>`).join('');
+
+  // Previews
+  const conNombre = imagenesActuales.filter(Boolean);
+  prevWrap.innerHTML = conNombre.map((nombre, i) => `
+    <div class="img-thumb-wrap">
+      <img id="prev_${i}" src="imagenes/${nombre}" alt="foto ${i+1}"
+        onerror="this.style.opacity='.25'" style="width:80px;height:80px;object-fit:cover;border-radius:6px"/>
+    </div>`).join('');
+
+  if (btn) btn.style.display = imagenesActuales.length >= 5 ? 'none' : 'block';
 }
 // ── SPECS ──
 function agregarSpec(k = '', v = '') {
@@ -529,7 +502,7 @@ function guardarProducto() {
 
 // ── LIMPIAR ──
 function limpiarForm() {
-  ['editId','fNombre','fDesc','fCatOtra','fEmoji', 'fImgFile'].forEach(id => document.getElementById(id).value = '');
+  ['editId','fNombre','fDesc','fCatOtra','fEmoji'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('fCat').value = '';
   document.getElementById('catOtraGroup').style.display = 'none';
   document.querySelector('input[name=stock][value=true]').checked = true;
@@ -650,77 +623,6 @@ function toast(msg, err = false) {
 
 renderLista();
 
-// ─── TRUCO TEMPORAL DE OPTIMIZACIÓN PROFUNDA ───
-async function optimizarAhoraMismo() {
-  const KEY = 'comproscol_productos';
-  let productos = JSON.parse(localStorage.getItem(KEY)) || [];
-  if (!productos.length) return;
-  
-  const achicarB64 = (b64) => {
-    return new Promise((resolve) => {
-      if (!b64 || !b64.startsWith('data:image')) return resolve(b64);
-      const img = new Image();
-      img.onload = () => {
-        let w = img.width, h = img.height;
-        if (w > 600) { h = Math.round(h * 600 / w); w = 600; }
-        const canvas = document.createElement('canvas');
-        canvas.width = w; canvas.height = h;
-        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-        resolve(canvas.toDataURL('image/jpeg', 0.65));
-      };
-      img.onerror = () => resolve(b64);
-      img.src = b64;
-    });
-  };
-
-  for (let p of productos) {
-    if (p.img) p.img = await achicarB64(p.img);
-    if (p.imagenes && p.imagenes.length > 0) {
-      for (let i = 0; i < p.imagenes.length; i++) {
-        p.imagenes[i] = await achicarB64(p.imagenes[i]);
-      }
-    }
-  }
-  
-  localStorage.setItem(KEY, JSON.stringify(productos));
-  // Te avisará con una ventana flotante en la pantalla cuando termine
-  alert("¡🎉 LOGRADO! Tus 34 productos han sido comprimidos con éxito. Ya puedes borrar este bloque de código de tu archivo.");
-}
-
-// ─── RECONEXIÓN AUTOMÁTICA DE LA CAJA DE IMÁGENES ───
-// Este código busca la caja gris y el input oculto del formulario
-const cajaGris = document.getElementById('dropZone') || document.querySelector('.drop-zone') || document.getElementById('dropzone');
-const inputArchivo = document.getElementById('fileInput') || document.querySelector('input[type="file"]') || document.getElementById('imagenes');
-
-if (cajaGris && inputArchivo) {
-    // 1. Reconecta el CLIC: Al tocar la caja gris, se abre el selector de archivos
-    cajaGris.onclick = function() {
-        inputArchivo.click();
-    };
-
-    // 2. Reconecta la SELECCIÓN: Al elegir fotos, se ejecutan en tu función nueva
-    inputArchivo.onchange = function(e) {
-        if (e.target.files && e.target.files.length > 0) {
-            procesarArchivos(e.target.files);
-        }
-    };
-
-    // 3. Reconecta el ARRASTRE (Drag & Drop) desde Drive o carpetas
-    cajaGris.addEventListener('dragover', (e) => {
-        e.preventDefault();
-    });
-
-    cajaGris.addEventListener('drop', (e) => {
-        e.preventDefault();
-        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-            procesarArchivos(e.dataTransfer.files);
-        }
-    });
-
-    console.log("🚀 ¡Caja de imágenes reconectada exitosamente por JavaScript!");
-} else {
-    console.error("❌ No se pudo encontrar la caja gris o el input en el HTML. Revisa los IDs.");
-}
 
 </script>
 </body>

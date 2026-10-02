@@ -7,7 +7,10 @@ const productos = [
     "img": "https://i.ibb.co/F4JPZLFV/ffd3895ce628.jpg",
     "emoji": "📦",
     "stock": true,
-    "specs": []
+    "specs": [],
+    "imagenes": [
+      "iMG_1358.jpg"
+    ]
   },
   {
     "id": 5,
@@ -82,7 +85,7 @@ const productos = [
     "nombre": "Tijera Piso Húmedo",
     "cat": "Señalización",
     "desc": "Señalización Tijera Piso Húmedo. Diseño plegable y liviano.\nMedidas: \nAncho 29.7 cm\nAlto: 59.5 cm\nLargo 42cm\nMensaje en Inglés y Español",
-    "img": "imagenes/tijera_piso_humedo.jpg",
+    "img": "https://i.ibb.co/qLQS0MpH/54e721d742da.jpg",
     "emoji": "📦",
     "stock": true,
     "specs": []
@@ -244,7 +247,8 @@ const productos = [
     "cat": "Protección Craneal",
     "desc": "Su uso es para trabajos de metalmecanicas, al sol y aire libre, para protección de la cabeza y cuello. Protege del polvo",
     "imagenes": [
-      "imagenes/CAPUCHA DRILL.jpg"
+      "https://i.ibb.co/Nn7bJNnx/6ad9f0e810e3.jpg",
+      "https://i.ibb.co/mCDVbddH/0168beac3b47.jpg"
     ],
     "emoji": "📦",
     "stock": true,
@@ -268,7 +272,7 @@ const productos = [
     "cat": "Protección Craneal",
     "desc": "Casco eco con rachet en polietileno dielectrico, amarillo y blanco",
     "imagenes": [
-      "imagenes/IMG_1358.jpg"
+      "https://i.ibb.co/0pZZ350Z/5ea539fc3c88.jpg"
     ],
     "emoji": "📦",
     "stock": true,
@@ -1604,7 +1608,7 @@ const productos = [
     "cat": "Señalización",
     "desc": "Buzón de sugerencias metálico de alta visibilidad, ideal para la recolección de reportes de condiciones inseguras, sugerencias y reportes de actos subestándar en el entorno laboral.",
     "imagenes": [
-      "imagenes/IMG_2426.jpg"
+      "https://i.ibb.co/BHYYYPd7/IMG-2897-1.jpg"
     ],
     "emoji": "📦",
     "stock": true,
