@@ -22,7 +22,7 @@ const productos = [
     "stock": true,
     "specs": [],
     "imagenes": [
-      "CONO-17CM.jpg"
+      "CONO 17CM.jpg"
     ]
   },
   {
