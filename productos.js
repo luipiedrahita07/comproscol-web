@@ -9,7 +9,7 @@ const productos = [
     "stock": true,
     "specs": [],
     "imagenes": [
-      "iMG_1358.jpg"
+      "IMG_1358.jpg"
     ]
   },
   {
@@ -84,7 +84,7 @@ const productos = [
     "nombre": "Tijera Piso Húmedo",
     "cat": "Señalización",
     "desc": "Señalización Tijera Piso Húmedo. Diseño plegable y liviano.\nMedidas: \nAncho 29.7 cm\nAlto: 59.5 cm\nLargo 42cm\nMensaje en Inglés y Español",
-    "img": "https://i.ibb.co/qLQS0MpH/54e721d742da.jpg",
+    "img": "https://i.ibb.co/qLQS0MpH/54e721d742da.jp",
     "emoji": "📦",
     "stock": true,
     "specs": []
@@ -2443,7 +2443,7 @@ const productos = [
     "cat": "Contra Incendios",
     "desc": "Aviso de señalizacion peligro carga larga y ancha",
     "imagenes": [
-      "https://i.ibb.co/VWPFv7Vb/PEND-N-100-X50.jpg"
+      "imagenes/pendon-100x50.jpg"
     ],
     "emoji": "📦",
     "stock": true,
