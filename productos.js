@@ -22,8 +22,7 @@ const productos = [
     "stock": true,
     "specs": [],
     "imagenes": [
-      "https://i.ibb.co/Fb2zBYqW/ad9f177b2556.jpg",
-      "https://i.ibb.co/PsLsqzJR/00e30be03d42.jpg"
+      "CONO-17CM.jpg"
     ]
   },
   {
